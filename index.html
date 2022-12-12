@@ -149,13 +149,13 @@ p {
 
  <section class="page active" [class]="slidingStepperPage > 0 ? 'page previous' : 'page active'"> 
 
- <div class="input"> 
- 
- <a on="tap:snackbarSlideIn.restart">Subscribe</a>
+ <div class="content"> 
+ <button type="button" on="tap:AMP.pushState({ slidingStepperPage: slidingStepperPage + 1 })" disabled [disabled]="!email" on="tap:snackbarSlideIn.restart"></button> 
+
+ <a on="_blank">Subscribe</a>
  </div> 
 
- <button type="button" on="tap:AMP.pushState({ slidingStepperPage: slidingStepperPage + 1 })" disabled [disabled]="!email"    ></button> 
-
+ 
  </section>
 
   <form class="favorite-button" method="post" action-xhr="<% base_path %>/favorite-with-count" target="_top" on="submit:AMP.setState({ previousFavoriteWithCount: favoriteWithCount, favoriteWithCount: { value: !favoriteWithCount.value, count: favoriteWithCount.count + (favoriteWithCount.value ? -1 : 1), } }), favorite-failed-message.hide; submit-error:AMP.setState({ value: !favoriteWithCount.value, favoriteWithCount: previousFavoriteWithCount.count }), favorite-failed-message.show"> <amp-list width="200" height="56" credentials="include" items="." single-item noloading src="<% base_path %>/favorite-with-count" binding="always">
