@@ -101,6 +101,9 @@
       ]
     </script>
   </amp-animation>
+  <!-- Feel free to change this text here -->
+<h2 class="preview-only">Mobile Blog</h2> 
+<p>Use the browser back button to go to the previous view.</p> 
 
  
 
@@ -143,9 +146,6 @@
  <div overflow tabindex="0" role="button" aria-label="Read more"> Read more! </div>
 </amp-iframe>
 
-<!-- Feel free to change this text here -->
-<h2 class="preview-only">Mobile Blog</h2> 
- <p>Use the browser back button to go to the previous view.</p> 
 
 
  <!-- ## A simple Dialog --> 
@@ -173,43 +173,7 @@
 
 
 
-<div>
-<form class="multistep-form" method="get" action="#" target="_top"> 
-<div class="stepper vertical"> 
-<button class="step-title step-active" [class]="currentStep > 0 ? 'step-title' : 'step-title step-active'" on="tap:AMP.pushState({ currentStep: 0 })"> <i class="step-incomplete" [class]="animalSelected ? 'step-complete' : 'step-incomplete'" data-step-nr="1"></i> Don't Sell My Info </button>
- <section [hidden]="currentStep > 0">
 
- <div class="content"> 
- <p>What's your favorite policies ?</p> 
-  <amp-selector on="select:AMP.setState({animalSelected: true})" class="poll" name="animal-poll"> 
-  <div option="cat">PRIVACY</div> 
-  <div option="dog">ADVERTISING</div> 
-  <div option="horse">TERMS</div> 
-  </amp-selector> 
-  <button disabled [disabled]="!animalSelected" on="tap:AMP.pushState({ currentStep: currentStep + 1 })"> continue </button> </div> </section> 
-  <button class="step-title" [class]="currentStep != 1 ? 'step-title' : 'step-title step-active'" disabled [disabled]="!animalSelected" on="tap:AMP.pushState({ currentStep: 1 })"> <i class="step-incomplete" [class]="colorSelected ? 'step-complete' : 'step-incomplete'" data-step-nr="2"></i> Advertisement</button> 
-  <section hidden [hidden]="currentStep != 1">
-  <div class="content">
-  <p>What's your favorite color?</p>
-  <amp-selector on="select:AMP.setState({colorSelected: true})" class="poll" name="color-poll">
-  <div option="blue">CONTENT</div>
-  <div option="green">GDPR</div>
-  <div option="yellow">CPPA</div> 
-  </amp-selector>
-
- <button disabled [disabled]="!colorSelected" on="tap:AMP.pushState({ currentStep: currentStep + 1 })"> Continue </button> </div> </section> 
- <button class="step-title" [class]="currentStep != 2 ? 'step-title' : 'step-title step-active'" disabled [disabled]="!colorSelected" on="tap:AMP.pushState({ currentStep: 2 })"> <i class="step-incomplete" [class]="fruitSelected ? 'step-complete' : 'step-incomplete'" data-step-nr="3"></i>Loading...</button>
- <section hidden [hidden]="currentStep != 2">
- <div class="content">
- <p>What's your favorite policies?</p> <amp-selector on="select:AMP.setState({fruitSelected: true})" class="poll" name="fruit-poll"> 
- <div option="apple">Privacy</div> 
- <div option="banana">Banners</div> 
- <div option="cheery">Terms Of Use </div> 
- </amp-selector> 
- <button disabled [disabled]="!fruitSelected" on="tap:AMP.pushState({ currentStep: currentStep + 1 })"> Continue </button> </div> </section>  </div> 
- <input type="submit" value="Submit"> 
- </form> 
-</div> 
 
 
  <h2 class="preview-only">Contact</h2>
