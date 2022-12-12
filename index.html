@@ -128,11 +128,9 @@
  <section [hidden]="currentPage > 0">
  <div class="top-bar">Home</div>
 
- <div id="content" class="snackbar" [text]="message">
-
+ <div>
  Loading...
- 
-</div>
+ </div>
 
  
  <div class="bottom-bar"> 
@@ -155,11 +153,6 @@
 
 
 
-<amp-iframe width="300" height="300" layout="responsive" sandbox="allow-scripts allow-same-origin" resizable src="https://my-galant.vercel.app/README.md" >
- <div overflow tabindex="0" role="button" aria-label="Read more"> Read More! </div>
-</amp-iframe>
-
-
 <form class="favorite-button" method="post" action-xhr="<% base_path %>/favorite-with-count" target="_top" on="submit:AMP.setState({ previousFavoriteWithCount: favoriteWithCount, favoriteWithCount: { value: !favoriteWithCount.value, count: favoriteWithCount.count + (favoriteWithCount.value ? -1 : 1), } }), favorite-failed-message.hide; submit-error:AMP.setState({ value: !favoriteWithCount.value, favoriteWithCount: previousFavoriteWithCount.count }), favorite-failed-message.show"> <amp-list width="200" height="56" credentials="include" items="." single-item noloading src="<% base_path %>/favorite-with-count" binding="always">
   <template type="amp-mustache">
   <div class="favorite-container"> 
@@ -171,7 +164,7 @@
   </amp-list>
 </form>
 
-  <amp-state id="favorite" credentials="include" src="<% base_path %>/favorite"> </amp-state>
+ <amp-state id="favorite" credentials="include" src="<% base_path %>/favorite"> </amp-state>
  
   
   <!-- ## The trigger -->
@@ -180,14 +173,19 @@
   <div class="trigger">
     <input type="email" on="input-debounced:AMP.setState({message: event.value})" value="Subscribe">
 
-    <button type="button" on="tap:snackbarSlideIn.restart">
+    <button class="inline-flex items-center px-4 py-2 mt-2 font-semibold text-lg tracking-tighter bg-blue-600 text-white" on="tap:snackbarSlideIn.restart">
       Subscribe
     </button>
 
   </div>
+  
 
- 
-
+  
+  <a class="inline-flex items-center px-4 py-2 mt-2 font-semibold text-lg tracking-tighter bg-blue-600 text-white" href="/">Google AMP</a>
+  
+  <div class="snackbar" [text]="message">
+   
+  </div>
 
  <h2 class="preview-only">Contact</h2>
  <p>Use the browser back button to go to the previous view.</p>
@@ -220,10 +218,12 @@
 
  </form> 
 
-<a href="/" tabIndex="0"><img class="bn44" src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"alt="bn44"/></a>
+<a href="/" tabIndex="0"><amp-img class="bn44" src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"alt="bn44"></amp-img></a>
  
-<a href="/" tabIndex="0"><img class="bn45" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png" alt="bn45"/></a>
+<a href="/" tabIndex="0"><amp-img class="bn45" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png" alt="bn45"></amp-img></a>
 
+
+<a class="inline-flex items-center px-4 py-2 mt-2 font-semibold text-lg tracking-tighter bg-blue-600 text-white" href="/">Google AMP</a>
 
 <p>
   Fork me? Fork you, @octocat!
