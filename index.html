@@ -120,35 +120,50 @@
   <!-- Feel free to change this text here -->
 
   <h2 class="preview-only">Mobile Blog</h2> 
-    
- <!-- ## A simple Dialog --> 
- <!-- We use an implicit state variable `currentPage` to keep track of the current view. Views are identified by numbers starting with `0` in their order of appearance. The view state is bound to each view using AMP's [`hidden` attribute](/content/amp-dev/documentation/guides-and-tutorials/learn/amp-actions-and-events.md#*-(all-elements)): ```html <section [hidden]="currentPage > 0"> ... </section> ``` ...and for initially hidden views we add the `hidden` attribute as a default: ```html <section hidden [hidden]="currentPage != 1"> ... </section> ``` We update the `currentPage` variable to progress forward in the dialog. In this sample we're using [`AMP.pushState(...)`](/content/amp-dev/documentation/components/reference/amp-bind.md#modifying-history-with-amp.pushstate()) instead of `AMP.setState(...)`. `AMP.pushState(...)` pushes a new entry onto the browser history stack, which allows the user to navigate back in the to use the browser's back button to move backwards in the dialog: ```html <button on="tap:AMP.pushState({ currentPage: currentPage + 1 })"> next </button> ``` --> 
+  
+  <!-- ## A simple Dialog --> 
+  <!-- We use an implicit state variable `currentPage` to keep track of the current view. Views are identified by numbers starting with `0` in their order of appearance. The view state is bound to each view using AMP's [`hidden` attribute](/content/amp-dev/documentation/guides-and-tutorials/learn/amp-actions-and-events.md#*-(all-elements)): ```html <section [hidden]="currentPage > 0"> ... </section> ``` ...and for initially hidden views we add the `hidden` attribute as a default: ```html <section hidden [hidden]="currentPage != 1"> ... </section> ``` We update the `currentPage` variable to progress forward in the dialog. In this sample we're using [`AMP.pushState(...)`](/content/amp-dev/documentation/components/reference/amp-bind.md#modifying-history-with-amp.pushstate()) instead of `AMP.setState(...)`. `AMP.pushState(...)` pushes a new entry onto the browser history stack, which allows the user to navigate back in the to use the browser's back button to move backwards in the dialog: ```html <button on="tap:AMP.pushState({ currentPage: currentPage + 1 })"> next </button> ``` --> 
  
-<div class="stepper simple">
- <section [hidden]="currentPage > 0">
- <div class="top-bar">Home</div>
+  <div class="stepper simple">
+  <section [hidden]="currentPage > 0">
+  <div class="top-bar">Home</div>
 
- <div>
- Loading...
+
+
+ <div class="top-bar">
+ 
  </div>
 
  
  <div class="bottom-bar"> 
- <div class="step-dots"> <i class="step-dot active"></i> <i class="step-dot"></i> <i class="step-dot"></i> </div> 
+ <div class="step-dots"> <i class="step-dot active"></i> <i class="step-dot"></i> <i class="step-dot"></i>
+ </div> 
+
   <button on="tap:AMP.pushState({ currentPage: currentPage + 1 })" class="button-next" >Next</button> </div> </section> 
   <section hidden [hidden]="currentPage != 1">
    <div class="top-bar">About</div>
-   <div class="content">Here is some more content ...</div> 
+   <div class="content">Here is some more content ...</div>
+
    <div class="bottom-bar">
    <button class="button-prev" on="tap:AMP.pushState({ currentPage: currentPage - 1 })">back</button> 
-   <div class="step-dots"> <i class="step-dot active"></i> <i class="step-dot active"></i> <i class="step-dot"></i> </div> 
-  <button on="tap:AMP.pushState({ currentPage: currentPage + 1 })" class="button-next" >Next</button> </div> </section>
+   <div class="step-dots"> <i class="step-dot active"></i> <i class="step-dot active"></i> <i class="step-dot"></i>
+   </div>
+
+  <button on="tap:AMP.pushState({ currentPage: currentPage + 1 })" class="button-next" >Next</button>
+ 
+  </div> 
+ </section>
+
   <section hidden [hidden]="currentPage != 2">
-  <div class="top-bar"> Privacy </div> 
-  <div class="content">Done!</div> 
+  <div class="top-bar">Privacy</div> 
+  <div class="content">Done!</div>
+
   <div class="bottom-bar">
- <button class="button-prev" on="tap:AMP.pushState({ currentPage: currentPage - 1 })">Back</button>
- <div class="step-dots"> <i class="step-dot active"></i> <i class="step-dot active"></i> <i class="step-dot active"></i> </div> </div> </section>
+  <button class="button-prev" on="tap:AMP.pushState({ currentPage: currentPage - 1 })">Back</button>
+  <div class="step-dots"> <i class="step-dot active"></i> <i class="step-dot active"></i> <i class="step-dot active"></i> 
+ </div> 
+ </div> 
+</section>
  </div>
 
 
@@ -173,9 +188,9 @@
   <div class="trigger">
     <input type="email" on="input-debounced:AMP.setState({message: event.value})" value="Subscribe">
 
-    <button class="inline-flex items-center px-4 py-2 mt-2 font-semibold text-lg tracking-tighter bg-blue-600 text-white" on="tap:snackbarSlideIn.restart">
-      Subscribe
-    </button>
+    <a class="inline-flex items-center px-4 py-2 mt-2 font-semibold text-lg tracking-tighter bg-blue-600 text-white" on="tap:snackbarSlideIn.restart">
+     Subscribe
+    </a>
 
   </div>
   
@@ -184,9 +199,9 @@
   <a class="inline-flex items-center px-4 py-2 mt-2 font-semibold text-lg tracking-tighter bg-blue-600 text-white" href="/">Google AMP</a>
   
   <div class="snackbar" [text]="message">
-   
+   Loading
   </div>
-
+ 
  <h2 class="preview-only">Contact</h2>
  <p>Use the browser back button to go to the previous view.</p>
 
@@ -197,13 +212,15 @@
  <section class="page active" [class]="slidingStepperPage > 0 ? 'page previous' : 'page active'"> 
 
  <div class="input"> 
- <input type="email" value="" name="email" autocomplete="email" id="id1" placeholder="Enter your Email" on="input-debounced: AMP.setState({ email: event.value })"> <label for="ip1" aria-hidden="true"> Enter your Email </label> </div> 
+ <input type="email" value="" name="email" autocomplete="email" id="id1" placeholder="Enter your Email" on="input-debounced: AMP.setState({ email: event.value })"> <label for="ip1" aria-hidden="true"> Enter your Email </label>
+ </div> 
+
  <button type="button" on="tap:AMP.pushState({ slidingStepperPage: slidingStepperPage + 1 })" disabled [disabled]="!email">next</button> 
 
  </section>
 
  <section class="page next" [class]="slidingStepperPage < 1 ? 'page next' : (slidingStepperPage > 1 ? 'page previous' : 'page active')"> 
- <h3>Welcome</h3>
+ <h3>Welcome!</h3>
 
  <button class="back" [text]="email" on="tap:AMP.pushState({ slidingStepperPage: slidingStepperPage - 1 })" disabled [disabled]="slidingStepperPage != 1" type="button"></button>
  <div class="input">
@@ -211,23 +228,18 @@
  <label for="ip2" aria-hidden="true"> Enter your Password </label> </div> 
 
  
-</section>
+ </section>
  <section class="page next" [class]="slidingStepperPage < 2 ? 'page next' : (slidingStepperPage > 2 ? 'page previous' : 'page active')"> <p>Submitting ...</p> </section>
  <section class="page next" [class]="slidingStepperPage < 3 ? 'page next' : (slidingStepperPage > 3 ? 'page previous' : 'page active')"> <h3>Success</h3> <p>You did it!</p> </section>
  <section class="page next" [class]="slidingStepperPage < 4 ? 'page next' : (slidingStepperPage > 4 ? 'page previous' : 'page active')"> <h3>Something went wrong. </h3> <button on="tap:AMP.setState({ slidingStepperPage: 0 })" type="button">Try again</button> </section>
 
  </form> 
 
-<a href="/" tabIndex="0"><amp-img class="bn44" src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"alt="bn44"></amp-img></a>
- 
-<a href="/" tabIndex="0"><amp-img class="bn45" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png" alt="bn45"></amp-img></a>
-
-
-<a class="inline-flex items-center px-4 py-2 mt-2 font-semibold text-lg tracking-tighter bg-blue-600 text-white" href="/">Google AMP</a>
 
 <p>
   Fork me? Fork you, @octocat!
 </p>
+<button type="button" on="tap:AMP.pushState({ slidingStepperPage: slidingStepperPage + 1 })" disabled [disabled]="!email">Mobile</button> 
 
 </body>
 </html>
