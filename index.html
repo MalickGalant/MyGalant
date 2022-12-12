@@ -29,7 +29,9 @@
  
 
   <style amp-custom>
-.bn45 { width: 170px; height: 50px; }
+.bn45 { 
+     width: 170px; height: 50px;
+}
 }
     :root { --color-primary: #005AF0; --color-text-light: #fff; --color-bg-light: #FAFAFC; --space-1: .5rem; /* 8px */ --space-2: 1rem; /* 16px */ }
  /* some basic button styling */ 
@@ -113,45 +115,9 @@
     </script>
   </amp-animation>
   <!-- Feel free to change this text here -->
+
   <h2 class="preview-only">Mobile Blog</h2> 
-  
-  
-
-
-  
-  <form class="favorite-button" method="post" action-xhr="<% base_path %>/favorite-with-count" target="_top" on="submit:AMP.setState({ previousFavoriteWithCount: favoriteWithCount, favoriteWithCount: { value: !favoriteWithCount.value, count: favoriteWithCount.count + (favoriteWithCount.value ? -1 : 1), } }), favorite-failed-message.hide; submit-error:AMP.setState({ value: !favoriteWithCount.value, favoriteWithCount: previousFavoriteWithCount.count }), favorite-failed-message.show"> <amp-list width="200" height="56" credentials="include" items="." single-item noloading src="<% base_path %>/favorite-with-count" binding="always">
-  <template type="amp-mustache">
-  <div class="favorite-container"> 
-  <input type="submit" class="{{#value}}heart-fill{{/value}}{{^value}}heart-border{{/value}}" [class]="favoriteWithCount.value ? 'heart-fill' : 'heart-border'" value="" aria-label="Favorite Toggle"> 
-  <div class="favorite-count" [text]="favoriteWithCount.count ? favoriteWithCount.count : ''">{{count}}</div> </div> </template> <div placeholder> 
-  <div class="favorite-container"> 
-  <input type="submit" disabled class="heart-loading" value="" aria-label="favorite placeholder"> 
-  <div class="favorite-count loading">1000</div> </div> </div>
-  </amp-list>
-  </form>
-
-  <amp-state id="favorite" credentials="include" src="<% base_path %>/favorite"> </amp-state>
- 
-
-  <!-- ## The snackbar -->
-  <!-- Our snackbar is a `div` containing the message. It's going to disappear after a few seconds so we don't provide any additional buttons to manually hide the snackbar. The text message is bound to an `amp-state` variable to make it's content configurable. This is not needed if the snackbar should always show the same message. -->
-
-  <div class="snackbar" [text]="message">
-    Requesting
-  </div>
-
-  <!-- ## The trigger -->
-  <!-- The snackbar animation is triggered via the `restart` action: `on="tap:snackbarSlideIn.restart"`. We use the `restart` action to make it possible to override an already active animation. The input field simply updates the `amp-state` variable containing the snackbar's message. -->
-
-  <div class="trigger">
-    <input type="email" on="input-debounced:AMP.setState({message: event.value})" value="Subscribe">
-
-    <button type="button" on="tap:snackbarSlideIn.restart">
-      Subscribe
-    </button>
-
-  </div>
-
+    
  <!-- ## A simple Dialog --> 
  <!-- We use an implicit state variable `currentPage` to keep track of the current view. Views are identified by numbers starting with `0` in their order of appearance. The view state is bound to each view using AMP's [`hidden` attribute](/content/amp-dev/documentation/guides-and-tutorials/learn/amp-actions-and-events.md#*-(all-elements)): ```html <section [hidden]="currentPage > 0"> ... </section> ``` ...and for initially hidden views we add the `hidden` attribute as a default: ```html <section hidden [hidden]="currentPage != 1"> ... </section> ``` We update the `currentPage` variable to progress forward in the dialog. In this sample we're using [`AMP.pushState(...)`](/content/amp-dev/documentation/components/reference/amp-bind.md#modifying-history-with-amp.pushstate()) instead of `AMP.setState(...)`. `AMP.pushState(...)` pushes a new entry onto the browser history stack, which allows the user to navigate back in the to use the browser's back button to move backwards in the dialog: ```html <button on="tap:AMP.pushState({ currentPage: currentPage + 1 })"> next </button> ``` --> 
  <div class="stepper simple">
@@ -176,7 +142,8 @@
   <div class="content">Done!</div> 
   <div class="bottom-bar">
  <button class="button-prev" on="tap:AMP.pushState({ currentPage: currentPage - 1 })">Back</button>
- <div class="step-dots"> <i class="step-dot active"></i> <i class="step-dot active"></i> <i class="step-dot active"></i> </div> </div> </section> </div>
+ <div class="step-dots"> <i class="step-dot active"></i> <i class="step-dot active"></i> <i class="step-dot active"></i> </div> </div> </section>
+ </div>
 
 
 
@@ -185,11 +152,39 @@
 </amp-iframe>
 
 
+<form class="favorite-button" method="post" action-xhr="<% base_path %>/favorite-with-count" target="_top" on="submit:AMP.setState({ previousFavoriteWithCount: favoriteWithCount, favoriteWithCount: { value: !favoriteWithCount.value, count: favoriteWithCount.count + (favoriteWithCount.value ? -1 : 1), } }), favorite-failed-message.hide; submit-error:AMP.setState({ value: !favoriteWithCount.value, favoriteWithCount: previousFavoriteWithCount.count }), favorite-failed-message.show"> <amp-list width="200" height="56" credentials="include" items="." single-item noloading src="<% base_path %>/favorite-with-count" binding="always">
+  <template type="amp-mustache">
+  <div class="favorite-container"> 
+  <input type="submit" class="{{#value}}heart-fill{{/value}}{{^value}}heart-border{{/value}}" [class]="favoriteWithCount.value ? 'heart-fill' : 'heart-border'" value="" aria-label="Favorite Toggle"> 
+  <div class="favorite-count" [text]="favoriteWithCount.count ? favoriteWithCount.count : ''">{{count}}</div> </div> </template> <div placeholder> 
+  <div class="favorite-container"> 
+  <input type="submit" disabled class="heart-loading" value="" aria-label="favorite placeholder"> 
+  <div class="favorite-count loading">1000</div> </div> </div>
+  </amp-list>
+</form>
+
+  <amp-state id="favorite" credentials="include" src="<% base_path %>/favorite"> </amp-state>
+ 
+  <!-- ## The snackbar -->
+  <!-- Our snackbar is a `div` containing the message. It's going to disappear after a few seconds so we don't provide any additional buttons to manually hide the snackbar. The text message is bound to an `amp-state` variable to make it's content configurable. This is not needed if the snackbar should always show the same message. -->
+
+  <div class="snackbar" [text]="message">
+    Requesting
+  </div>
+
+  <!-- ## The trigger -->
+  <!-- The snackbar animation is triggered via the `restart` action: `on="tap:snackbarSlideIn.restart"`. We use the `restart` action to make it possible to override an already active animation. The input field simply updates the `amp-state` variable containing the snackbar's message. -->
+
+  <div class="trigger">
+    <input type="email" on="input-debounced:AMP.setState({message: event.value})" value="Subscribe">
+
+    <button type="button" on="tap:snackbarSlideIn.restart">
+      Subscribe
+    </button>
+
+  </div>
 
  
-
-
-
 
 
  <h2 class="preview-only">Contact</h2>
@@ -221,7 +216,7 @@
  <section class="page next" [class]="slidingStepperPage < 4 ? 'page next' : (slidingStepperPage > 4 ? 'page previous' : 'page active')"> <h3>Something went wrong. </h3> <button on="tap:AMP.setState({ slidingStepperPage: 0 })" type="button">Try again</button> </section>
 
  </form> 
-<a href='/'><img class="bn44" src='https://developer.microsoft.com/en-us/store/badges/images/English_get-it-from-MS.png' alt='Badge'/></a>
+
 <a href="/" tabIndex="0"><img class="bn44" src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"alt="bn44"/></a>
  
 <a href="/" tabIndex="0"><img class="bn45" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png" alt="bn45"/></a>
