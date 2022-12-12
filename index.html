@@ -149,27 +149,13 @@ p {
 
  <section class="page active" [class]="slidingStepperPage > 0 ? 'page previous' : 'page active'"> 
 
- <div class="content"> 
- <button type="button" on="tap:AMP.pushState({ slidingStepperPage: slidingStepperPage + 1 })" disabled [disabled]="!email" on="tap:snackbarSlideIn.restart"></button> 
+ <div class="input"> 
+ <a on="tap:snackbarSlideIn.restart">Subscribe</a> 
 
- <a on="_blank">Subscribe</a>
  </div> 
-
- 
  </section>
 
-  <form class="favorite-button" method="post" action-xhr="<% base_path %>/favorite-with-count" target="_top" on="submit:AMP.setState({ previousFavoriteWithCount: favoriteWithCount, favoriteWithCount: { value: !favoriteWithCount.value, count: favoriteWithCount.count + (favoriteWithCount.value ? -1 : 1), } }), favorite-failed-message.hide; submit-error:AMP.setState({ value: !favoriteWithCount.value, favoriteWithCount: previousFavoriteWithCount.count }), favorite-failed-message.show"> <amp-list width="200" height="56" credentials="include" items="." single-item noloading src="<% base_path %>/favorite-with-count" binding="always">
-  <template type="amp-mustache">
-  <div class="favorite-container"> 
-  <input type="submit" class="{{#value}}heart-fill{{/value}}{{^value}}heart-border{{/value}}" [class]="favoriteWithCount.value ? 'heart-fill' : 'heart-border'" value="" aria-label="Favorite Toggle"> 
-  <div class="favorite-count" [text]="favoriteWithCount.count ? favoriteWithCount.count : ''">{{count}}</div> </div> </template> <div placeholder> 
-  <div class="favorite-container"> 
-  <input type="submit" disabled class="heart-loading" value="" aria-label="favorite placeholder"> 
-  <div class="favorite-count loading">1000</div> </div> </div>
-  </amp-list>
-
-</form>
-
+  
  <amp-state id="favorite" credentials="include" src="<% base_path %>/favorite"> </amp-state>
  
  </div>
@@ -205,18 +191,18 @@ p {
 </section>
  </div>
  
-
-
-
-  
-  
-
-  
   
   <div class="snackbar" [text]="message">
    Please wait till the end...
   </div>
  
+
+
+
+
+
+
+
  <h2 class="preview-only">Contact</h2>
  <p>Use the browser back button to go to the previous view.</p>
 
@@ -250,6 +236,18 @@ p {
  <section class="page next" [class]="slidingStepperPage < 4 ? 'page next' : (slidingStepperPage > 4 ? 'page previous' : 'page active')"> <h3>Something went wrong. </h3> <button on="tap:AMP.setState({ slidingStepperPage: 0 })" type="button">Try again</button> </section>
 
  </form> 
+ <form class="favorite-button" method="post" action-xhr="<% base_path %>/favorite-with-count" target="_top" on="submit:AMP.setState({ previousFavoriteWithCount: favoriteWithCount, favoriteWithCount: { value: !favoriteWithCount.value, count: favoriteWithCount.count + (favoriteWithCount.value ? -1 : 1), } }), favorite-failed-message.hide; submit-error:AMP.setState({ value: !favoriteWithCount.value, favoriteWithCount: previousFavoriteWithCount.count }), favorite-failed-message.show"> 
+  <amp-list width="200" height="56" credentials="include" items="." single-item noloading src="<% base_path %>/favorite-with-count" binding="always">
+  <template type="amp-mustache">
+  <div class="favorite-container"> 
+  <input type="submit" class="{{#value}}heart-fill{{/value}}{{^value}}heart-border{{/value}}" [class]="favoriteWithCount.value ? 'heart-fill' : 'heart-border'" value="" aria-label="Favorite Toggle"> 
+  <div class="favorite-count" [text]="favoriteWithCount.count ? favoriteWithCount.count : ''">{{count}}</div> </div> </template> <div placeholder> 
+  <div class="favorite-container"> 
+  <input type="submit" disabled class="heart-loading" value="" aria-label="favorite placeholder"> 
+  <div class="favorite-count loading">1000</div> </div> </div>
+  </amp-list>
+
+</form>
 
 
 
