@@ -144,10 +144,22 @@ p {
 
 
 
- <div class="top-bar">
-  Home
- </div>
+ <div class="middle-bar">
+  <form class="favorite-button" method="post" action-xhr="<% base_path %>/favorite-with-count" target="_top" on="submit:AMP.setState({ previousFavoriteWithCount: favoriteWithCount, favoriteWithCount: { value: !favoriteWithCount.value, count: favoriteWithCount.count + (favoriteWithCount.value ? -1 : 1), } }), favorite-failed-message.hide; submit-error:AMP.setState({ value: !favoriteWithCount.value, favoriteWithCount: previousFavoriteWithCount.count }), favorite-failed-message.show"> <amp-list width="200" height="56" credentials="include" items="." single-item noloading src="<% base_path %>/favorite-with-count" binding="always">
+  <template type="amp-mustache">
+  <div class="favorite-container"> 
+  <input type="submit" class="{{#value}}heart-fill{{/value}}{{^value}}heart-border{{/value}}" [class]="favoriteWithCount.value ? 'heart-fill' : 'heart-border'" value="" aria-label="Favorite Toggle"> 
+  <div class="favorite-count" [text]="favoriteWithCount.count ? favoriteWithCount.count : ''">{{count}}</div> </div> </template> <div placeholder> 
+  <div class="favorite-container"> 
+  <input type="submit" disabled class="heart-loading" value="" aria-label="favorite placeholder"> 
+  <div class="favorite-count loading">1000</div> </div> </div>
+  </amp-list>
+</form>
 
+ <amp-state id="favorite" credentials="include" src="<% base_path %>/favorite"> </amp-state>
+ 
+  
+ </div>
  
  <div class="bottom-bar"> 
  <div class="step-dots"> <i class="step-dot active"></i> <i class="step-dot"></i> <i class="step-dot"></i>
@@ -182,27 +194,14 @@ p {
 
 
 
-<form class="favorite-button" method="post" action-xhr="<% base_path %>/favorite-with-count" target="_top" on="submit:AMP.setState({ previousFavoriteWithCount: favoriteWithCount, favoriteWithCount: { value: !favoriteWithCount.value, count: favoriteWithCount.count + (favoriteWithCount.value ? -1 : 1), } }), favorite-failed-message.hide; submit-error:AMP.setState({ value: !favoriteWithCount.value, favoriteWithCount: previousFavoriteWithCount.count }), favorite-failed-message.show"> <amp-list width="200" height="56" credentials="include" items="." single-item noloading src="<% base_path %>/favorite-with-count" binding="always">
-  <template type="amp-mustache">
-  <div class="favorite-container"> 
-  <input type="submit" class="{{#value}}heart-fill{{/value}}{{^value}}heart-border{{/value}}" [class]="favoriteWithCount.value ? 'heart-fill' : 'heart-border'" value="" aria-label="Favorite Toggle"> 
-  <div class="favorite-count" [text]="favoriteWithCount.count ? favoriteWithCount.count : ''">{{count}}</div> </div> </template> <div placeholder> 
-  <div class="favorite-container"> 
-  <input type="submit" disabled class="heart-loading" value="" aria-label="favorite placeholder"> 
-  <div class="favorite-count loading">1000</div> </div> </div>
-  </amp-list>
-</form>
 
- <amp-state id="favorite" credentials="include" src="<% base_path %>/favorite"> </amp-state>
- 
-  
   <!-- ## The trigger -->
   <!-- The snackbar animation is triggered via the `restart` action: `on="tap:snackbarSlideIn.restart"`. We use the `restart` action to make it possible to override an already active animation. The input field simply updates the `amp-state` variable containing the snackbar's message. -->
 
   <div class="trigger">
     <input type="email" on="input-debounced:AMP.setState({message: event.value})" value="Subscribe">
 
-    <a class="inline-flex items-center px-4 py-2 mt-2 font-semibold text-lg tracking-tighter bg-blue-600 text-white" on="tap:snackbarSlideIn.restart">
+    <a class="" on="tap:snackbarSlideIn.restart">
      Subscribe
     </a>
 
@@ -210,7 +209,6 @@ p {
   
 
   
-  <a class="inline-flex items-center px-4 py-2 mt-2 font-semibold text-lg tracking-tighter bg-blue-600 text-white" href="/">Google AMP</a>
   
   <div class="snackbar" [text]="message">
    Loading
