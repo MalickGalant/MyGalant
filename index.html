@@ -150,9 +150,9 @@ p {
  <section class="page active" [class]="slidingStepperPage > 0 ? 'page previous' : 'page active'"> 
 
  <div class="input"> 
- <input type="email" value="" name="email" autocomplete="email" id="id1" placeholder="Enter your Email" on="input-debounced:AMP.setState({message: event.value})">
+ <input type="email" value="" name="email" autocomplete="email" id="id1" placeholder="" on="input-debounced:AMP.setState({message: event.value})">
  
- <a for="ip1" aria-hidden="true" on="tap:snackbarSlideIn.restart">Subscribe</a>
+ <a on="tap:snackbarSlideIn.restart">Subscribe</a>
  </div> 
 
  <button type="button" on="tap:AMP.pushState({ slidingStepperPage: slidingStepperPage + 1 })" disabled [disabled]="!email">Subscribe</button> 
