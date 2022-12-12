@@ -141,8 +141,19 @@ p {
   <div class="stepper simple">
   <section [hidden]="currentPage > 0">
   <div class="top-bar">Home</div>
-  <div class="content">
-  <p>Fork me? @Octocat!</p>
+  <div class="octocat">
+
+  <!-- ## The trigger -->
+  <!-- The snackbar animation is triggered via the `restart` action: `on="tap:snackbarSlideIn.restart"`. We use the `restart` action to make it possible to override an already active animation. The input field simply updates the `amp-state` variable containing the snackbar's message. -->
+
+  <div class="trigger">
+    <input type="email" on="input-debounced:AMP.setState({message: event.value})" value="Subscribe">
+
+    <a class="" on="tap:snackbarSlideIn.restart">
+     Subscribe
+    </a>
+
+  </div>
 
   <form class="favorite-button" method="post" action-xhr="<% base_path %>/favorite-with-count" target="_top" on="submit:AMP.setState({ previousFavoriteWithCount: favoriteWithCount, favoriteWithCount: { value: !favoriteWithCount.value, count: favoriteWithCount.count + (favoriteWithCount.value ? -1 : 1), } }), favorite-failed-message.hide; submit-error:AMP.setState({ value: !favoriteWithCount.value, favoriteWithCount: previousFavoriteWithCount.count }), favorite-failed-message.show"> <amp-list width="200" height="56" credentials="include" items="." single-item noloading src="<% base_path %>/favorite-with-count" binding="always">
   <template type="amp-mustache">
@@ -195,17 +206,7 @@ p {
 
 
 
-  <!-- ## The trigger -->
-  <!-- The snackbar animation is triggered via the `restart` action: `on="tap:snackbarSlideIn.restart"`. We use the `restart` action to make it possible to override an already active animation. The input field simply updates the `amp-state` variable containing the snackbar's message. -->
-
-  <div class="trigger">
-    <input type="email" on="input-debounced:AMP.setState({message: event.value})" value="Subscribe">
-
-    <a class="" on="tap:snackbarSlideIn.restart">
-     Subscribe
-    </a>
-
-  </div>
+  
   
 
   
