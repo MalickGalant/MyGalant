@@ -143,20 +143,26 @@ p {
   <div class="top-bar">Home</div>
   <div class="content">
   
+ <!-- ## Stepper with Sliding Animation -->
+
+ <!-- This sample demonstrates a simple sliding animation visualising the dialog progress. The basic approach is the same as in the previous two samples: a variable keeps track of the current page. The only difference is that here we can't use the `hidden` attribute as we want to transition between the different pages. The `hidden` attribute uses `display: none`, which cannot be animated in CSS. Instead we use three different CSS classes (`active`, `next` and `previous`) to slide between the different pages: ```css .page.active { transform: translateX(0%); pointer-events: auto; } .page:not(.active) { opacity: 0.5; pointer-events: none; } .page.next { transform: translateX(100%); } .page.previous { transform: translateX(-100%); } ``` For each page we assign the matching class based on whether the page index is smaller, same or larger: ```html <section class="page next" [class]="slidingStepperPage < 1 ? 'page next' : (slidingStepperPage > 1 ? 'page previous' : 'page active')"> ...</section> ``` To avoid accidentally revealing hidden steps via keyboard focus, we need to make sure to explicitly disable all input elements in hidden steps, e.g.: ```html <input type="text" value="" name="password" disabled [disabled]="slidingStepperPage != 1" ...> ``` We sync the entered email address between the two steps using an amp-state variable `email`: ```html <input type="email" value="" name="email" on="input-debounced: AMP.setState({ email: event.value })" ...> ... <button class="back" [text]="email" ...></button> ``` Here is the full example: --> <form class="stepper sliding" method="post" action-xhr="/documentation/examples/api/submit-form-input-text-xhr" novalidate on="submit: AMP.setState({ slidingStepperPage: 2 }); submit-success: AMP.setState({ slidingStepperPage: 3 }); submit-error: AMP.setState({ slidingStepperPage: 4 }); "> 
+
+ <section class="page active" [class]="slidingStepperPage > 0 ? 'page previous' : 'page active'"> 
+
+ <div class="input"> 
+ <input type="email" value="" name="email" autocomplete="email" id="id1" placeholder="Enter your Email" on="input-debounced:AMP.setState({message: event.value})">
  
-  <!-- ## The trigger -->
-  <!-- The snackbar animation is triggered via the `restart` action: `on="tap:snackbarSlideIn.restart"`. We use the `restart` action to make it possible to override an already active animation. The input field simply updates the `amp-state` variable containing the snackbar's message. -->
-<section class="page active" [class]="slidingStepperPage > 0 ? 'page previous' : 'page active'">
-  <div class="input">
-    <input type="email" on="input-debounced:AMP.setState({message: event.value})" value="Subscribe">
+ <a for="ip1" aria-hidden="true" on="tap:snackbarSlideIn.restart">Subscribe</a>
+ </div> 
 
-    <a class="" on="tap:snackbarSlideIn.restart">
-     Subscribe
-    </a>
+ <button type="button" on="tap:AMP.pushState({ slidingStepperPage: slidingStepperPage + 1 })" disabled [disabled]="!email">Subscribe</button> 
 
-  </div>
+ </section>
+ <section class="page next" [class]="slidingStepperPage < 2 ? 'page next' : (slidingStepperPage > 2 ? 'page previous' : 'page active')"> <p>Submitting ...</p> </section>
+ <section class="page next" [class]="slidingStepperPage < 3 ? 'page next' : (slidingStepperPage > 3 ? 'page previous' : 'page active')"> <h3>Success</h3> <p>You did it!</p> </section>
+ <section class="page next" [class]="slidingStepperPage < 4 ? 'page next' : (slidingStepperPage > 4 ? 'page previous' : 'page active')"> <h3>Something went wrong. </h3> <button on="tap:AMP.setState({ slidingStepperPage: 0 })" type="button">Try again</button> </section>
 
-
+  
   <form class="favorite-button" method="post" action-xhr="<% base_path %>/favorite-with-count" target="_top" on="submit:AMP.setState({ previousFavoriteWithCount: favoriteWithCount, favoriteWithCount: { value: !favoriteWithCount.value, count: favoriteWithCount.count + (favoriteWithCount.value ? -1 : 1), } }), favorite-failed-message.hide; submit-error:AMP.setState({ value: !favoriteWithCount.value, favoriteWithCount: previousFavoriteWithCount.count }), favorite-failed-message.show"> <amp-list width="200" height="56" credentials="include" items="." single-item noloading src="<% base_path %>/favorite-with-count" binding="always">
   <template type="amp-mustache">
   <div class="favorite-container"> 
@@ -171,7 +177,6 @@ p {
 
  <amp-state id="favorite" credentials="include" src="<% base_path %>/favorite"> </amp-state>
  
- </section>
  </div>
  
  <div class="bottom-bar"> 
@@ -233,7 +238,9 @@ p {
  <button type="button" on="tap:AMP.pushState({ slidingStepperPage: slidingStepperPage + 1 })" disabled [disabled]="!email">next</button> 
 
  </section>
-<section class="page next" [class]="slidingStepperPage < 1 ? 'page next' : (slidingStepperPage > 1 ? 'page previous' : 'page active')"> 
+
+
+ <section class="page next" [class]="slidingStepperPage < 1 ? 'page next' : (slidingStepperPage > 1 ? 'page previous' : 'page active')"> 
  <h3>Welcome!</h3>
 
  <button class="back" [text]="email" on="tap:AMP.pushState({ slidingStepperPage: slidingStepperPage - 1 })" disabled [disabled]="slidingStepperPage != 1" type="button"></button>
