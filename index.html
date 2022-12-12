@@ -167,10 +167,8 @@
   <section hidden [hidden]="currentPage != 2"> <div class="top-bar"> Step 3 </div> 
   <div class="content">Done!</div> 
 <div class="bottom-bar">
- <button class="button-prev" on="tap:AMP.pushState({ currentPage: currentPage - 1 })">Privacy</button>
+ <button class="button-prev" on="tap:AMP.pushState({ currentPage: currentPage - 1 })">Back</button>
  <div class="step-dots"> <i class="step-dot active"></i> <i class="step-dot active"></i> <i class="step-dot active"></i> </div> </div> </section> </div>
-
-
 
 
 
@@ -189,7 +187,7 @@
   <div option="horse">TERMS</div> 
   </amp-selector> 
   <button disabled [disabled]="!animalSelected" on="tap:AMP.pushState({ currentStep: currentStep + 1 })"> continue </button> </div> </section> 
-  <button class="step-title" [class]="currentStep != 1 ? 'step-title' : 'step-title step-active'" disabled [disabled]="!animalSelected" on="tap:AMP.pushState({ currentStep: 1 })"> <i class="step-incomplete" [class]="colorSelected ? 'step-complete' : 'step-incomplete'" data-step-nr="2"></i> Advertisement </button> 
+  <button class="step-title" [class]="currentStep != 1 ? 'step-title' : 'step-title step-active'" disabled [disabled]="!animalSelected" on="tap:AMP.pushState({ currentStep: 1 })"> <i class="step-incomplete" [class]="colorSelected ? 'step-complete' : 'step-incomplete'" data-step-nr="2"></i> Advertisement</button> 
   <section hidden [hidden]="currentStep != 1">
   <div class="content">
   <p>What's your favorite color?</p>
@@ -214,7 +212,7 @@
 </div> 
 
 
- <h2 class="preview-only">Animation</h2>
+ <h2 class="preview-only">Contact</h2>
  <p>Use the browser back button to go to the previous view.</p>
  <!-- ## Stepper with Sliding Animation -->
 
@@ -232,7 +230,9 @@
  <div class="input">
  <input type="password" value="" name="password" id="id2" placeholder="Enter your Password" disabled [disabled]="slidingStepperPage != 1" on="input-debounced: AMP.setState({ password: event.value })">
  <label for="ip2" aria-hidden="true"> Enter your Password </label> </div> 
- <button disabled [disabled]="slidingStepperPage != 1 || !password" type="submit">submit</button> </section>
+
+ 
+</section>
  <section class="page next" [class]="slidingStepperPage < 2 ? 'page next' : (slidingStepperPage > 2 ? 'page previous' : 'page active')"> <p>Submitting ...</p> </section>
  <section class="page next" [class]="slidingStepperPage < 3 ? 'page next' : (slidingStepperPage > 3 ? 'page previous' : 'page active')"> <h3>Success</h3> <p>You did it!</p> </section>
  <section class="page next" [class]="slidingStepperPage < 4 ? 'page next' : (slidingStepperPage > 4 ? 'page previous' : 'page active')"> <h3>Something went wrong. </h3> <button on="tap:AMP.setState({ slidingStepperPage: 0 })" type="button">Try again</button> </section>
